@@ -9,7 +9,7 @@ import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const Stack = createStackNavigator();
 
-const AppNavigator = ({serverIp, sendJson, sendConnectRequest, connected, socket}) => {
+const AppNavigator = ({liveData, serverIp, sendJson, sendConnectRequest, connected, socket}) => {
     const { theme } = useTheme();
     const styles = createStyles(theme);
   return (
@@ -47,8 +47,10 @@ const AppNavigator = ({serverIp, sendJson, sendConnectRequest, connected, socket
         {props => (
           <FMCScreen
             {...props}
+            liveData={liveData}
             serverIp={serverIp}
             sendJson={sendJson}
+            socket={socket}
           />
         )}
       </Stack.Screen>

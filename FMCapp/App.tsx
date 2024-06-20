@@ -45,7 +45,7 @@ const App: React.FC= () => {
   
   return (
     <ThemeProvider>
-      <AppNavigator serverIp={serverIp} sendConnectRequest={sendConnectRequest}sendJson={sendJson} connected={connected} socket={socket}/>
+      <AppNavigator liveData={liveData} serverIp={serverIp} sendConnectRequest={sendConnectRequest}sendJson={sendJson} connected={connected} socket={socket}/>
     </ThemeProvider>
   );
 };
