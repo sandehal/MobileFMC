@@ -55,7 +55,12 @@ const setupUdpListener = (onMessage, onAck) => {
     });
   };
 
-  const sendJson = (data) => {
+  const sendJson = (data, serverIp) => {
+    if (!serverIp) {
+      console.error('Server IP is not defined.');
+      return;
+    }
+
     const message = Buffer.from(JSON.stringify(data));
     socket.send(message, 0, message.length, XP11_PLUGIN_PORT, serverIp, (err) => {
       if (err) {

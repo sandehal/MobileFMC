@@ -12,7 +12,7 @@ var executionColors = {
     execLightOn: '#f3ffa3',
 };
 
-const FMCKeyboard = ({ sendJson, isExecLightOn, setIsExecLightOn})=> {
+const FMCKeyboard = ({ sendJson, isExecLightOn, setIsExecLightOn, serverIp})=> {
 
     const { theme } = useTheme();
     const styles = createStyles(theme);
@@ -24,7 +24,7 @@ const FMCKeyboard = ({ sendJson, isExecLightOn, setIsExecLightOn})=> {
           // your data here
           command: fmcButtonsMap.get(commandRef)
         };
-        sendJson(sendMessage);
+        sendJson(sendMessage, serverIp);
       };
 
 

@@ -31,18 +31,27 @@ const AppNavigator = ({serverIp, sendJson, sendConnectRequest, connected, socket
           }}>
         {/* <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Menu' }} /> */}
 
-        <Stack.Screen 
-        name="Home" 
-        component={(props) => <HomeScreen {...props} serverIp={serverIp} sendJson={sendJson} sendConnectRequest={sendConnectRequest}connected={connected} socket={socket}/>} 
-        options={{ title: 'Menu' }} 
-      />
+        <Stack.Screen name="Home">
+        {props => (
+          <HomeScreen
+            {...props}
+            sendConnectRequest={sendConnectRequest}
+            connected={connected}
+            socket={socket}
+          />
+        )}
+        </Stack.Screen>
 
         {/* <Stack.Screen name="FMC" component={FMCScreen} options={{ title: 'FMC' } } /> */}
-        <Stack.Screen 
-        name="FMC" 
-        component={(props) => <FMCScreen {...props} serverIp={serverIp} sendJson={sendJson} />} 
-        options={{ title: 'FMC' }} 
-      />
+        <Stack.Screen name="FMC">
+        {props => (
+          <FMCScreen
+            {...props}
+            serverIp={serverIp}
+            sendJson={sendJson}
+          />
+        )}
+      </Stack.Screen>
         <Stack.Screen name="METAR" component={FMCScreen} options={{ title: 'Metar' } } />
       </Stack.Navigator>
     </NavigationContainer>
