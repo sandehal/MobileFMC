@@ -4,6 +4,7 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './Screens/HomeScreen';
 import FMCScreen from './Screens/FMCScreen';
+import MetarScreen from './Screens/MetarScreen';
 import { useTheme } from './ThemeContext';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
@@ -54,7 +55,7 @@ const AppNavigator = ({liveData, serverIp, sendJson, sendConnectRequest, connect
           />
         )}
       </Stack.Screen>
-        <Stack.Screen name="METAR" component={FMCScreen} options={{ title: 'Metar' } } />
+        <Stack.Screen name="METAR" component={MetarScreen} options={{ title: 'Metar' } } />
       </Stack.Navigator>
     </NavigationContainer>
   );
