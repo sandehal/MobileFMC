@@ -25,13 +25,17 @@ const HomeScreen = ({ navigation, sendConnectRequest, socket, connected }) => {
 
       <View style={styles.rowOfButtons}>
         <View>
-          <TouchableOpacity style={styles.button} onPress={() => navigation.navigate('FMC')}>
-              <Text style={styles.buttonText}>FMC</Text>
-          </TouchableOpacity>
+        <TouchableOpacity
+          style={[styles.button, !connected && styles.disabledButton]}
+          onPress={() => navigation.navigate('FMC')}
+          disabled={!connected}
+          >
+          <Text style={[styles.buttonText, !connected && styles.disabledButtonText]}>FMC</Text>
+        </TouchableOpacity>
         </View>
         <View>
           <TouchableOpacity style={styles.button} onPress={() => {toggleTheme(theme)}}>
-              <Text style={styles.buttonText}>TOGGLE theme</Text>
+              <Text style={styles.buttonText}>TOGGLE THEME</Text>
           </TouchableOpacity>
         </View>
       </View>
@@ -87,6 +91,12 @@ const createStyles = (theme) =>
       // borderWidth: 2,
     },
     
+    disabledButton: {
+      borderColor: theme.disabledButton,
+    },
+    disabledButtonText: {
+      opacity: 0.4,
+    },
     // Define more styles based on theme if needed
   });
 

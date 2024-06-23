@@ -26,7 +26,12 @@ const App: React.FC= () => {
       setConnected(true);
     };
 
-    const { socket, sendConnectRequest, sendJson } = setupUdpListener(onMessage, onAck);
+    const onDisconnect = () => {
+      console.log('Disconnected');
+      setConnected(false);
+    };
+
+    const { socket, sendConnectRequest, sendJson } = setupUdpListener(onMessage, onAck, onDisconnect);
     setSocket(socket);
     setSendJson(() => sendJson);
     setSendConnectRequest(() => sendConnectRequest);
@@ -45,7 +50,7 @@ const App: React.FC= () => {
   
   return (
     <ThemeProvider>
-      <AppNavigator serverIp={serverIp} sendConnectRequest={sendConnectRequest}sendJson={sendJson} connected={connected} socket={socket}/>
+      <AppNavigator liveData={liveData} serverIp={serverIp} sendConnectRequest={sendConnectRequest}sendJson={sendJson} connected={connected} socket={socket}/>
     </ThemeProvider>
   );
 };

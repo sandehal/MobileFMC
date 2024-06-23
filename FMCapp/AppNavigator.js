@@ -4,12 +4,13 @@ import { NavigationContainer } from '@react-navigation/native';
 import { createStackNavigator } from '@react-navigation/stack';
 import HomeScreen from './Screens/HomeScreen';
 import FMCScreen from './Screens/FMCScreen';
+import MetarScreen from './Screens/MetarScreen';
 import { useTheme } from './ThemeContext';
 import changeNavigationBarColor from 'react-native-navigation-bar-color';
 
 const Stack = createStackNavigator();
 
-const AppNavigator = ({serverIp, sendJson, sendConnectRequest, connected, socket}) => {
+const AppNavigator = ({liveData, serverIp, sendJson, sendConnectRequest, connected, socket}) => {
     const { theme } = useTheme();
     const styles = createStyles(theme);
   return (
@@ -31,19 +32,30 @@ const AppNavigator = ({serverIp, sendJson, sendConnectRequest, connected, socket
           }}>
         {/* <Stack.Screen name="Home" component={HomeScreen} options={{ title: 'Menu' }} /> */}
 
-        <Stack.Screen 
-        name="Home" 
-        component={(props) => <HomeScreen {...props} serverIp={serverIp} sendJson={sendJson} sendConnectRequest={sendConnectRequest}connected={connected} socket={socket}/>} 
-        options={{ title: 'Menu' }} 
-      />
+        <Stack.Screen name="Home">
+        {props => (
+          <HomeScreen
+            {...props}
+            sendConnectRequest={sendConnectRequest}
+            connected={connected}
+            socket={socket}
+          />
+        )}
+        </Stack.Screen>
 
         {/* <Stack.Screen name="FMC" component={FMCScreen} options={{ title: 'FMC' } } /> */}
-        <Stack.Screen 
-        name="FMC" 
-        component={(props) => <FMCScreen {...props} serverIp={serverIp} sendJson={sendJson} />} 
-        options={{ title: 'FMC' }} 
-      />
-        <Stack.Screen name="METAR" component={FMCScreen} options={{ title: 'Metar' } } />
+        <Stack.Screen name="FMC">
+        {props => (
+          <FMCScreen
+            {...props}
+            liveData={liveData}
+            serverIp={serverIp}
+            sendJson={sendJson}
+            socket={socket}
+          />
+        )}
+      </Stack.Screen>
+        <Stack.Screen name="METAR" component={MetarScreen} options={{ title: 'Metar' } } />
       </Stack.Navigator>
     </NavigationContainer>
   );

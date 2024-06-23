@@ -6,6 +6,8 @@ const dayTheme = {
     screenTextColor: '#d2d2d6',
     sideButtonBackground: '#080807',
     headerBackground: '#292b2d',
+
+    disabledButton: '#4d4d4f',
   };
 
 // Night colors
@@ -17,6 +19,8 @@ const dayTheme = {
     screenTextColor: '#d2d2d6',
     sideButtonBackground: '#080807',
     headerBackground: '#1d1e20',
+
+    disabledButton: '#4d4d4f',
   };
 
   export { dayTheme, nightTheme}

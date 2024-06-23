@@ -7,7 +7,7 @@ const fmcButtonsMap = require('./FMCCommands');
 import { useTheme } from '../../ThemeContext';
 
 
-const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn} ) => {
+const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, socket} ) => {
   const { theme } = useTheme();
   const styles = createStyles(theme);
 
@@ -19,7 +19,11 @@ const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn} ) =
       // your data here
       command: fmcButtonsMap.get(commandRef)
     };
-    sendJson(sendMessage, serverIp);
+    try {
+      sendJson(sendMessage, serverIp);
+    } catch (error) {
+      console.error('Failed to send message:', error);
+    }
   };
 
 

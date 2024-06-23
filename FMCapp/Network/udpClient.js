@@ -8,11 +8,11 @@ import { Buffer } from 'buffer';
 // const XP11_PLUGIN_IP = '192.168.86.21'; // Replace with the IP address of the X-Plane machine
 
 const SERVER_PORT = 7878; // Replace with the port you expect data on
-const CLIENT_PORT = 7880; // Port where the app listens for acknowledgment
+const CLIENT_PORT = 7878; // Port where the app listens for acknowledgment
 const XP11_PLUGIN_PORT = 7879; // Replace with the port the X-Plane plugin listens on
 const BROADCAST_ADDRESS = '255.255.255.255'; // Broadcast address
 
-const setupUdpListener = (onMessage, onAck) => {
+const setupUdpListener = (onMessage, onAck, onDisconnect) => {
   const socket = dgram.createSocket('udp4');
 
   socket.bind(CLIENT_PORT);
@@ -30,7 +30,14 @@ const setupUdpListener = (onMessage, onAck) => {
         console.log('Received ack from X-Plane plugin');
         onAck(rinfo.address);
       }
+      
+      else if (data.command === 'disconnect') {
+        console.log('Received disconnect from X-Plane plugin');
+        onDisconnect();
+      }
+
       else {
+        console.log("Received data from X-Plane plugin", data);
         onMessage(data);
       }
       
@@ -45,7 +52,7 @@ const setupUdpListener = (onMessage, onAck) => {
   });
 
   const sendConnectRequest = () => {
-    const message = Buffer.from(JSON.stringify({ command: 'connect-request' }));
+    const message = Buffer.from(JSON.stringify({ request: 'connect' }));
     socket.send(message, 0, message.length, XP11_PLUGIN_PORT, BROADCAST_ADDRESS, (err) => {
       if (err) {
         console.error('UDP send error:', err.stack);
@@ -55,7 +62,12 @@ const setupUdpListener = (onMessage, onAck) => {
     });
   };
 
-  const sendJson = (data) => {
+  const sendJson = (data, serverIp) => {
+    if (!serverIp) {
+      console.error('Server IP is not defined.');
+      return;
+    }
+
     const message = Buffer.from(JSON.stringify(data));
     socket.send(message, 0, message.length, XP11_PLUGIN_PORT, serverIp, (err) => {
       if (err) {
