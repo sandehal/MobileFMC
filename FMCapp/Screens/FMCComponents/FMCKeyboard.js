@@ -12,10 +12,24 @@ var executionColors = {
     execLightOn: '#f3ffa3',
 };
 
-const FMCKeyboard = ({ sendJson, isExecLightOn, setIsExecLightOn, serverIp, socket})=> {
+const FMCKeyboard = ({ data, sendJson, isExecLightOn, setIsExecLightOn, serverIp, socket})=> {
 
     const { theme } = useTheme();
     const styles = createStyles(theme);
+    let light = 0;
+    if (data) {
+        let { ExecLight } = data;
+        console.log("Execlight: ", ExecLight.charCodeAt(0).toString() + " :: ");
+        // Check if execLightValue is 1 or 0 and set the light variable accordingly
+        if (ExecLight.charCodeAt(0) === 1) {
+            // If ExecLight is 1, set light to a representation you prefer, e.g., '☺' or simply keep it as 1
+            console.log("Light is 1");
+            light = 1; // or light = 1; if you want to keep it numeric
+        }
+    }
+    console.log("Light: ", light);
+
+
 
     // const [isExecLightOn, setExecLightOn] = useState(false); // Add this line
 
@@ -103,7 +117,7 @@ const FMCKeyboard = ({ sendJson, isExecLightOn, setIsExecLightOn, serverIp, sock
                         </TouchableOpacity>
 
                         <View style={styles.execBox}>
-                            <View style={[styles.execLight, {backgroundColor: isExecLightOn ? executionColors.execLightOn : executionColors.execLightOff}]}></View>
+                            <View style={[styles.execLight, {backgroundColor: light ? executionColors.execLightOn : executionColors.execLightOff}]}></View>
                             <TouchableOpacity style={styles.buttonWithText} onPress={() => 
                                 {   
                                     handleButtonClick("exec");

@@ -35,7 +35,7 @@ const FMCScreen = ({ navigation, liveData, serverIp, sendJson, connected, socket
   return (
     <SafeAreaView style={styles.container}>
       {<PrimaryFlightDisplay sendJson={sendJson} data={liveData} setIsExecLightOn={setIsExecLightOn} serverIp={serverIp}/>}
-      {<FMCKeyboard sendJson={sendJson} isExecLightOn={isExecLightOn} setIsExecLightOn={setIsExecLightOn} serverIp={serverIp} socket={socket}/>}
+      {<FMCKeyboard data={liveData} sendJson={sendJson} isExecLightOn={isExecLightOn} setIsExecLightOn={setIsExecLightOn} serverIp={serverIp} socket={socket}/>}
     </SafeAreaView>
   );
 };

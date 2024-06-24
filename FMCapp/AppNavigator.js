@@ -55,7 +55,7 @@ const AppNavigator = ({liveData, serverIp, sendJson, sendConnectRequest, connect
           />
         )}
       </Stack.Screen>
-        <Stack.Screen name="METAR" component={MetarScreen} options={{ title: 'Metar' } } />
+      <Stack.Screen name="METAR" component={MetarScreen} options={{ title: 'Metar' } } />
       </Stack.Navigator>
     </NavigationContainer>
   );

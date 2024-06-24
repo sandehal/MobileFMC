@@ -5,6 +5,7 @@ import { Line } from 'react-native-svg';
 import { Colors } from 'react-native/Libraries/NewAppScreen';
 const fmcButtonsMap = require('./FMCCommands');
 import { useTheme } from '../../ThemeContext';
+import FMCDisplay from './FMCDisplay';
 
 
 const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, socket} ) => {
@@ -36,6 +37,7 @@ const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, soc
 
   let lines = new Array(28).fill("");
   const regex = /\s{3,} |> </; // 2 or more spaces
+  const buttonDesign = '────';
 
   if (data) {let { pageLarge, 
     pageSmall, 
@@ -110,27 +112,27 @@ const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, soc
         <View style={styles.buttonSides}>
           <TouchableOpacity style={styles.sideButton} title="-" onPress={() => handleButtonClick("l1")}>
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("l2")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("l3")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("l4")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("l5")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => {
@@ -138,106 +140,35 @@ const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, soc
             if(isActivate) {setIsExecLightOn(false); console.log("Exec Light off");}
           }} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
         </View>
-        <View style={styles.largeDisplay}>
-          <Text style={styles.page}>{lines[0]}{lines[1]}</Text>
-          {/* Line 1 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftTextSmall}>{safeSplit(lines[2], regex)[0]}</Text>
-            <Text style={styles.rightTextSmall}>{safeSplit(lines[2], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[8], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[8], regex)[1]}</Text>
-          </View>
-
-          {/* Line 2 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftTextSmall}>{safeSplit(lines[3], regex)[0]}</Text>
-            <Text style={styles.rightTextSmall}>{safeSplit(lines[3], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[9], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[9], regex)[1]}</Text>
-          </View>
-
-          {/* Line 3 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftTextSmall}>{safeSplit(lines[4], regex)[0]}</Text>
-            <Text style={styles.rightTextSmall}>{safeSplit(lines[4], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[10], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[10], regex)[1]}</Text>
-          </View>
-
-          {/* Line 4 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftTextSmall}>{safeSplit(lines[5], regex)[0]}</Text>
-            <Text style={styles.rightTextSmall}>{safeSplit(lines[5], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[11], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[11], regex)[1]}</Text>
-          </View>
-
-          {/* Line 5 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftTextSmall}>{safeSplit(lines[6], regex)[0]}</Text>
-            <Text style={styles.rightTextSmall}>{safeSplit(lines[6], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[12], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[12], regex)[1]}</Text>
-          </View>
-
-          {/* Line 6 */}
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[7], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[7], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={styles.leftText}>{safeSplit(lines[13], regex)[0]}</Text>
-            <Text style={styles.rightText}>{safeSplit(lines[13], regex)[1]}</Text>
-          </View>
-
-          <View style={styles.lineContainer}>
-            <Text style={[styles.EntryText]}>{safeSplit(lines[26], regex)[0]}</Text>
-          </View>
-        </View>
+        <FMCDisplay data={data}/>
         <View style={styles.buttonSides}>
           <TouchableOpacity style={styles.sideButton} title="-" onPress={() => handleButtonClick("r1")}>
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("r2")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("r3")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("r4")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => handleButtonClick("r5")} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
           <TouchableOpacity style={styles.sideButton} onPress={() => {
@@ -245,7 +176,7 @@ const PrimaryFlightDisplay = ( {data, sendJson, serverIp , setIsExecLightOn, soc
             if(isActivate) {setIsExecLightOn(true); console.log("Exec Light On");}
           }} >
             <View style={styles.button}>
-              <Text style={styles.buttonText}>────</Text>
+              <Text style={styles.buttonText}>{buttonDesign}</Text>
             </View>
           </TouchableOpacity>
         </View>
@@ -269,14 +200,13 @@ const createStyles = (theme) =>
       flex: 0.9,
       alignItems: 'center',
       justifyContent: 'center',
-      padding: 10,
       marginLeft: 20,
       width: '100%',
       height: '100%',
     },
     upperHalf: {
       flex: 1,
-      marginTop: 20,
+      marginTop: 10,
       flexDirection: 'row', // Arrange children in a row
       justifyContent: 'center', // Center children horizontally
       alignItems: 'center', // Center children vertically
@@ -285,14 +215,13 @@ const createStyles = (theme) =>
       //Very short horizontally
       width: '15%',
       height: '100%',
-      justifyContent: 'space-between',
+      justifyContent: 'center',
       alignItems: 'flex-start',
-      marginBottom: 10,
-      marginTop: 10,
-      paddingTop: 35,
+      marginBottom: '5%',
+      marginTop: '20%',
       paddingBottom: 31,
-      paddingLeft: 5,
-      paddingRight: 5,
+      // paddingLeft: 5,
+      // paddingRight: 5,
       // borderColor: 'white',
       // borderWidth: 2,
     },
@@ -300,6 +229,7 @@ const createStyles = (theme) =>
       //Very short horizontally
       width: '100%',
       height: '7%',
+      marginVertical: '20%',
       backgroundColor: theme.sideButtonBackground,
     },
     button: {
