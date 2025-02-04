@@ -1,3 +1,6 @@
+This solution offers emulation of the Flight Management Computer on the ZIBO 737 on your phone, in the form of an app!
+
+
 Features:
 - Mobile version of the FMC (brain of the aircraft)
 - Plugin to install in X-plane 11
