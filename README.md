@@ -16,8 +16,8 @@ Preview:
 
 Appearance in simulator:
 
-<a href="previewImgs/zibo737cockpit.jpg">
-  <img src="previewImgs/zibo737cockpit.jpg" alt="The Zibo 737 cockpit" width="300"/>
+<a href="previewImgs/zibo737cockpit.jpeg">
+  <img src="previewImgs/zibo737cockpit.jpeg" alt="The Zibo 737 cockpit" width="300"/>
 </a>
 
 Home screen:
