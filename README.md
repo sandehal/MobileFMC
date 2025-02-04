@@ -14,6 +14,12 @@ Installation:
 Preview:
 
 
+Appearance in simulator:
+
+<a href="previewImgs/zibo737cockpit.jpg">
+  <img src="previewImgs/zibo737cockpit.jpg" alt="The Zibo 737 cockpit" width="300"/>
+</a>
+
 Home screen:
 
 <a href="previewImgs/homeScreen_disconnected.jpg">
